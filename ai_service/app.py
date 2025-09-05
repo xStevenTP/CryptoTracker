@@ -19,15 +19,17 @@ def predict():
             return jsonify({"error": "coin and prices are required"}), 400
 
         # Create a simple prompt for the AI model
-        prompt = (
-            f"The last 10 prices of {coin} are {prices}. "
-            f"Suggest whether to buy, sell, or hold {coin}."
-        )
+        #prompt = (
+         #   f"The last 10 prices of {coin} are {prices}. "
+          #  f"Suggest whether to buy, sell, or hold {coin}."
+        #)
 
+        prompt = f"Give me a simple suggestion for {coin}, the cryptocurrency."
         # Generate a suggestion
         result = suggestion_pipeline(prompt, max_length=50, num_return_sequences=1)
 
-        suggestion_text = result[0]["generated_text"]
+        raw_text = result[0]["generated_text"]
+        suggestion_text = raw_text.replace(prompt, "").strip()
 
         return jsonify({
             "coin": coin,
