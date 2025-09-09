@@ -3,7 +3,7 @@ from django.utils import timezone
 from .models import Coin, Forecast
 
 COINGECKO_URL = "https://api.coingecko.com/api/v3/simple/price"
-AI_SERVICE_URL = "http://localhost:8001/predict"  # or use os.getenv("AI_SERVICE_URL")
+AI_SERVICE_URL = os.getenv("AI_SERVICE_URL", "http://localhost:8001/predict")
 
 def fetch_and_update_prices(symbols=["bitcoin", "ethereum", "dogecoin"]):
     """

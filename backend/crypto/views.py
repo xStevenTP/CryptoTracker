@@ -7,7 +7,7 @@ from .serializers import CoinSerializer, ForecastSerializer
 from django.utils import timezone
 
 COINGECKO_API = "https://api.coingecko.com/api/v3"
-AI_SERVICE_URL = "http://localhost:8001/predict" 
+AI_SERVICE_URL = os.getenv("AI_SERVICE_URL", "http://localhost:8001/predict")
 
 @api_view(["POST"])
 def refresh_forecasts(request):
