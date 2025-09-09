@@ -17,7 +17,7 @@ export default function Watchlist() {
       const coinRes = await api.get<Coin[]>("/coins/");
       setCoins(coinRes.data);
 
-      const forecastRes = await axios.get<Forecast[]>("http://localhost:8000/api/forecast/");
+      const forecastRes = await api.get<Forecast[]>("/api/forecast/");
       const forecastMap: Record<string, Forecast> = {};
       forecastRes.data.forEach((f) => {
         forecastMap[f.coin] = f;
@@ -34,7 +34,7 @@ export default function Watchlist() {
   const refreshForecasts = async () => {
     try {
       setRefreshing(true);
-      await axios.post("http://localhost:8000/api/forecast-refresh/", {});
+      await api.post("/api/forecast-refresh/", {});
       await fetchData();
     } catch (err) {
       console.error("Error refreshing forecasts:", err);
